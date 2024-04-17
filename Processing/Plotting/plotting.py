@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import numpy as np
 #%%
-coverage_df = pd.read_csv('coverage.csv')
+coverage_df = pd.read_csv('../coverage.csv')
 coverage_df.drop('Unnamed: 0',axis=1,inplace=True)
 #%%
 def plot_chrom_df(chrom_df,chrom_name):
@@ -19,7 +19,7 @@ for chrom in chr_names:
     plot_chrom_df(coverage_df,chrom)
 
 #%%
-plots_dir = 'Coverage_Plots'
+plots_dir = '../Coverage_Plots'
 def plot_chrom_df(chrom_df, chrom_name, ax):
     df = chrom_df[chrom_df['chrom'] == chrom_name]
     ax.plot(df['index'], df['coverage'], label=chrom_name)
