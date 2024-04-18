@@ -29,7 +29,6 @@ for key in coverage_dict.keys():
 for key in coverage_dict.keys():
     coverage_dict[key] = poissonFcns.get_spread(coverage_dict[key],'global_poisson_prob',
                                     'dynamic_poisson_prob','global_local_poisson_spread'
-                                    )
 
 
 #%% apply multiple p value tests
