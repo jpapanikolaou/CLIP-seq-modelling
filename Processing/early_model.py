@@ -1,10 +1,10 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import sys
 sys.path.append('/Users/johnpapanikolaou/Columbia/spring-junior/Genomics/Project/Processing')
 import importlib
-import poissonFcns
+from Processing.Scripts import poissonFcns
+
 importlib.reload(poissonFcns)
 #%%
 coverages = pd.read_csv('coverage.csv')
@@ -27,7 +27,7 @@ for key in coverage_dict.keys():
 
 #%% # get spread between global_poisson_prob and dynamic_poisson_probability
 for key in coverage_dict.keys():
-    coverage_dict[key] = poissonFcns.get_spread(coverage_dict[key],'global_poisson_prob',
+    coverage_dict[key] = poissonFcns.get_spread(coverage_dict[key], 'global_poisson_prob',
                                     'dynamic_poisson_prob','global_local_poisson_spread'
 
 
