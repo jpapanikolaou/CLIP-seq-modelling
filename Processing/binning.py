@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 #%%
 
-bam_path = '../bioinformatics_28_23_3013_s20/data_found/ENCODE Data/RIP-sq_targetRBP_PABPC1/bam_bai_data/ENCFF000VAJ.bam'
+bam_path = '../ENCODE Data/RIP-sq_targetRBP_PABPC1/bam_bai_data/ENCFF000VAJ.bam'
 #%%
 bin_size = 100000
 genome_size = 2913022393

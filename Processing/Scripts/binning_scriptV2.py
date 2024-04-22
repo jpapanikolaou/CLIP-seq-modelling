@@ -2,7 +2,7 @@ import pysam
 import numpy as np
 import pandas as pd
 def analyze_bam_coverage(bam_path, output_path, output_file_name):
-    bin_size = 100000  # Set the bin size
+    bin_size = 10000  # Set the bin size
 
     # Open BAM file
     bam = pysam.AlignmentFile(bam_path, 'rb')
@@ -37,3 +37,25 @@ def analyze_bam_coverage(bam_path, output_path, output_file_name):
         chromosome_coverage[chrom] = pd.DataFrame({'index': indices, 'counts': counts})
     return chromosome_coverage
 
+def save_dict_to_csv_filtered(chromosome_coverage, output_file): #WARNING: this is for humans
+    dfs = []
+    for chromosome, df in chromosome_coverage.items():
+        df['chromosome'] = chromosome  # Add a column for the chromosome name
+        dfs.append(df)
+
+    # Concatenate all DataFrames into a single DataFrame
+    combined_df = pd.concat(dfs, ignore_index=True)
+
+    # Reorder columns if needed to have 'chromosome' as the first column
+    combined_df = combined_df[['chromosome', 'index', 'counts']]
+
+    # filter combined_df
+    chromosomes = ['chr1', 'chr2', 'chr3', 'chr4', 'chr5', 'chr6', 'chr7', 'chr8',
+                   'chr9', 'chr10', 'chr11', 'chr12', 'chr13', 'chr14', 'chr15',
+                   'chr16', 'chr17', 'chr18', 'chr19', 'chr20', 'chr21', 'chr22',
+                   'chrX', 'chrY', 'chrM']
+    combined_df = combined_df[combined_df['chromosome'].isin(chromosomes)]
+
+    # Write the DataFrame to a CSV file
+    combined_df.to_csv(output_file, index=False)
+    print(f"Data saved to {output_file}")
