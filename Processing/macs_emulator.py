@@ -57,26 +57,27 @@ def perform_peak_calling(df):
 
     peak_groups = significant_df.groupby('peak')['count'].agg(['mean', 'max', 'size'])
     peak_groups = peak_groups[peak_groups['size'] > 1]
-    return significant_df, peak_groups
+    return df, significant_df, peak_groups
 
 #%%
-control_df = pd.read_csv("../ENCODE Data/eClip_control_and_target/control_binned.csv")
+control_df = pd.read_csv("ENCODE Data/eClip_control_and_target/control_binned.csv")
 
 #%%
 lambda_df = calculate_excluded_lambdas(control_df)
 #%%
-significant_df, peak_groups = perform_peak_calling(lambda_df)
+regular_df,significant_df, peak_groups = perform_peak_calling(lambda_df)
 
-
+#%%
+regular_df.to_csv("ENCODE Data/eClip_control_and_target/our_control_peaks.csv", index=False)
 #%% plot p and q values
 import matplotlib.pyplot as plt
 import numpy as np
-df = lambda_df
+df = regular_df
 df['-log10(p_value)'] = -np.log10(df['p_value'])
-# plt.figure(figsize=(12, 6))
-# plt.scatter(df['start'], df['-log10(p_value)'], c=df['significant'], cmap='viridis', alpha=0.5)
-# plt.axhline(y=-np.log10(0.05), color='r', linestyle='--')  # Threshold line for significance
-# plt.title('Manhattan Plot of Peaks')
-# plt.xlabel('Genomic Position')
-# plt.ylabel('-log10(p-value)')
-# plt.show()
+plt.figure(figsize=(12, 6))
+plt.scatter(df['start'], df['-log10(p_value)'], c=df['significant'], cmap='viridis', alpha=0.5)
+plt.axhline(y=-np.log10(0.05), color='r', linestyle='--')  # Threshold line for significance
+plt.title('Manhattan Plot of Peaks')
+plt.xlabel('Genomic Position')
+plt.ylabel('-log10(p-value)')
+plt.show()
