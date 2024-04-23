@@ -32,7 +32,12 @@ macs_control_path = "ENCODE Data/eClip_control_and_target/Control/control_output
 macs_control_data = macs_comparison.read_encode(macs_control_path)
 our_data_path = "ENCODE Data/eClip_control_and_target/our_control_peaks.csv"
 our_control_data = pd.read_csv(our_data_path)
+significant_our_control_data = our_control_data[our_control_data['significant']==True]
+# note - overlap_df can have more tuples than one of the participating dataframes,
+# if there are multiple overlaps within a given tuple
+overlap_df = macs_comparison.find_overlaps_optimized(significant_our_control_data,macs_control_data)
+confusion_matrix = macs_comparison.build_confusion_matrix(significant_our_control_data,macs_control_data,overlap_df)
 
-# method to generate overlap_df will take a bit of time ~1-2 minutes
-overlap_df = macs_comparison.find_overlaps_optimized(our_control_data,macs_control_data)
-confusion_matrix = macs_comparison.build_confusion_matrix(our_control_data,macs_control_data,overlap_df)
+
+#%% see how we did relative to macs :)
+print(confusion_matrix)
