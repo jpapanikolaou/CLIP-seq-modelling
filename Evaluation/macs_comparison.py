@@ -55,6 +55,18 @@ def find_overlaps_optimized(df1, df2):
     return overlaps_df
 
 
+#%%
+
+
+def build_confusion_matrix(df1,df2,overlap_df):
+   agreed = len(overlap_df['start_df2'])
+   in_df1_not_df2 = len(df1[~df1['start'].isin(overlap_df['start_df2'])])
+   in_df2_not_df1 = len(df2[~df2['start'].isin(overlap_df['start_df1'])])
+   return{
+       'in_both':agreed,
+     'in_df1_not_df2':in_df1_not_df2,
+    'in_df2_not_df1':in_df2_not_df1
+   }
 
 
 
@@ -65,5 +77,6 @@ our_data_path = "ENCODE Data/eClip_control_and_target/our_control_peaks.csv"
 our_control_data = pd.read_csv(our_data_path)
 our_control_data = our_control_data[our_control_data['significant']==True]
 #%%
-
 overlap_df = find_overlaps_optimized(our_control_data,macs_control_data)
+#%%
+confusion_matrix = build_confusion_matrix(our_control_data,macs_control_data,overlap_df)
