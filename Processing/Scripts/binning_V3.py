@@ -9,16 +9,6 @@ chromosomes = ['chr1', 'chr2', 'chr3', 'chr4', 'chr5', 'chr6', 'chr7', 'chr8',
 #%%
 
 def bin_reads_to_dataframe(bam_file_path, bin_size):
-    """
-    Bin reads in a BAM file by genomic index, excluding duplicates and unmapped reads, and return a DataFrame.
-
-    Args:
-    bam_file_path (str): Path to the BAM file.
-    bin_size (int): Size of bins in base pairs.
-
-    Returns:
-    pandas.DataFrame: DataFrame with columns ['chromosome', 'start', 'end', 'count'] listing read counts per bin.
-    """
     bam = pysam.AlignmentFile(bam_file_path, "rb")
     all_bins = {}  # Initialize as dictionary
 
@@ -40,7 +30,10 @@ def bin_reads_to_dataframe(bam_file_path, bin_size):
             bin_index_end = (read.reference_end - 1) // bin_size
             if bin_index_end >= len(all_bins[chrom]):
                 bin_index_end = len(all_bins[chrom]) - 1  # Ensure index is within range
-            all_bins[chrom][bin_index_start:bin_index_end + 1] += 1
+
+            all_bins[chrom][bin_index_start] += 1
+            '''all_bins[chrom][bin_index_start:bin_index_end + 1] += 1 culprit for multiple binnings
+                                                                        of the same read'''
         else:
             removed_count +=1
 
@@ -62,7 +55,7 @@ def bin_reads_to_dataframe(bam_file_path, bin_size):
 #%%
 
 
-control_file_path = "../../ENCODE Data/eClip_control_and_target/Control/ENCFF913CBD.bam"
+control_file_path = "ENCODE Data/eClip_control_and_target/Control/ENCFF913CBD.bam"
 bam_file = pysam.AlignmentFile(control_file_path, "rb")
 # chrom_lengths = extract_regions(bam_file)
 
@@ -71,5 +64,5 @@ bam_file = pysam.AlignmentFile(control_file_path, "rb")
 control_binned = bin_reads_to_dataframe(control_file_path,50)
 
 #%%
-control_binned.to_csv("../../ENCODE Data/eClip_control_and_target/control_binned.csv", index=False)
+control_binned.to_csv("ENCODE Data/eClip_control_and_target/control_binned.csv", index=False)
 

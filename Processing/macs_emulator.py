@@ -60,7 +60,7 @@ def perform_peak_calling(df):
     return df, significant_df, peak_groups
 
 #%%
-control_df = pd.read_csv("ENCODE Data/eClip_control_and_target/control_binned.csv")
+control_df = pd.read_csv("../ENCODE Data/eClip_control_and_target/control_binned.csv")
 
 #%%
 lambda_df = calculate_excluded_lambdas(control_df)
@@ -68,7 +68,7 @@ lambda_df = calculate_excluded_lambdas(control_df)
 regular_df,significant_df, peak_groups = perform_peak_calling(lambda_df)
 
 #%%
-regular_df.to_csv("ENCODE Data/eClip_control_and_target/our_control_peaks.csv", index=False)
+regular_df.to_csv("../ENCODE Data/eClip_control_and_target/our_control_peaks.csv", index=False)
 #%% plot p and q values
 import matplotlib.pyplot as plt
 import numpy as np
