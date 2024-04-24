@@ -15,7 +15,7 @@ importlib.reload(macs_comparison)
 
 #%% run binning_V3
 
-control_file_path = "ENCODE Data/eClip_control_and_target/Control/ENCFF913CBD.bam"
+control_file_path = "ENCODE Data/eClip_control_and_target/Control/ControlFiltering/control_filtered_reads.bam"
 control_binned = binning_V3.bin_reads_to_dataframe(control_file_path,50)
 control_binned.to_csv("ENCODE Data/eClip_control_and_target/control_binned.csv", index=False)
 

@@ -3,12 +3,29 @@
 ## How to run the pipeline
 
 1. Install BAM files from ENCODE in your preferred data path
-2. Run filtering.py to filter the reads (remove duplicates)
-3. Use do_binning.py to bin the reads. This will take ~5 min for 42M reads.
-4. do_binning.py will write a CSV to a location that you specify with reads
-    so you don't have to run things multiple times
-5. Run model_calling.py to execute the model script, which will create
-    two dataframes with the results of the model - once for control, once
-    for target
-6. The 'meat' of this project is in 'Project/Processing/Scripts'. Everything
-    in the pipeline I described to you calls from there
+2. Install samtools, if you havene't already. Note that you will need to use ```brew install``` if 
+you're on a Mac, as the samtools verision on conda is out of date and doesn't have ```markdup``` on the path
+3. Do filtering
+
+First, run:
+```bash'''
+samtools markdup <input file name.bam> <output file name.bam>
+```
+This allows binning_V3.py to effectively call read.isDuplicate() to filter out duplicates. Results recapitulate MACS
+
+
+Second, run
+```bash'''
+samtools index <output file name.bam>
+```
+
+This indexes the files and allows bam_file.fetch() to be called, which greatly speeds up the binning process
+
+4. Set up main.py with the appropriate filtered files.
+
+macs_path in ```python main.py``` should be 
+```macs_path = "ENCODE Data/<experiment_name>/<experiment_type>/<bam_indexing_output.bam>```, NOT the .bambai extension file
+
+When it prints removed_count, this number should NOT be zero.
+
+5. Run the rest of ```python main.py```, this bit should be fairly self-explanatory :)
