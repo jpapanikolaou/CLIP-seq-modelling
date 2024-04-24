@@ -1,0 +1,7 @@
+Experiment data:
+
+
+Experiment 1: eClip
+
+TARGET download: https://www.encodeproject.org/files/ENCFF862SNV/
+CONTROL download: https://www.encodeproject.org/files/ENCFF913CBD/
