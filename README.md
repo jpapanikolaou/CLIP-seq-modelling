@@ -1,5 +1,17 @@
 # ClIP-Seq Processor
 
+## Data install details
+
+1. This program is designed to work wth bam files. You can download the bam files from the ENCODE database.
+Data that we used is present in ```datainfo.txt``` in the root directory of this repo.
+2. Path organization format is as follows:
+```ENCODE Data/<experiment_name>/<experiment_type (control or target)>/<bam_indexing_output.bam>```
+
+## Run MACS
+
+1. Run macs with these arguments: ```macs2 callpeak --nomodel -t <input.bam> -g hs -n <output_name>```
+2. Convert the ```*_peaks.xls```  file to a CSV manually (this is a one-time thing, and lets one compare the model's output with MACS)
+
 ## How to run the pipeline
 
 1. Install BAM files from ENCODE in your preferred data path
