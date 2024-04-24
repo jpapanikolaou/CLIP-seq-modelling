@@ -21,8 +21,8 @@ def calculate_excluded_lambdas(df, bin_size=50, local_bp=1000):
     window_size_5k = 5000 // bin_size
     window_size_10k = 10000 // bin_size
 
-    # Global lambda: mean across the data
-    df['lambda_BG'] = df['count'].mean()
+    # Global lambda: mean across the data for each chromosome
+    df['lambda_BG'] = df.groupby('chromosome')['count'].transform('mean')
 
     # Adjusting the window size for accurate exclusion of the current bin
     def adjusted_rolling(series, window_size):
@@ -59,25 +59,25 @@ def perform_peak_calling(df):
     peak_groups = peak_groups[peak_groups['size'] > 1]
     return df, significant_df, peak_groups
 
-#%%
-control_df = pd.read_csv("../ENCODE Data/eClip_control_and_target/control_binned.csv")
-
-#%%
-lambda_df = calculate_excluded_lambdas(control_df)
-#%%
-regular_df,significant_df, peak_groups = perform_peak_calling(lambda_df)
-
-#%%
-regular_df.to_csv("../ENCODE Data/eClip_control_and_target/our_control_peaks.csv", index=False)
-#%% plot p and q values
-import matplotlib.pyplot as plt
-import numpy as np
-df = regular_df
-df['-log10(p_value)'] = -np.log10(df['p_value'])
-plt.figure(figsize=(12, 6))
-plt.scatter(df['start'], df['-log10(p_value)'], c=df['significant'], cmap='viridis', alpha=0.5)
-plt.axhline(y=-np.log10(0.05), color='r', linestyle='--')  # Threshold line for significance
-plt.title('Manhattan Plot of Peaks')
-plt.xlabel('Genomic Position')
-plt.ylabel('-log10(p-value)')
-plt.show()
+# #%%
+# control_df = pd.read_csv("../ENCODE Data/eClip_control_and_target/control_binned.csv")
+#
+# #%%
+# lambda_df = calculate_excluded_lambdas(control_df)
+# #%%
+# regular_df,significant_df, peak_groups = perform_peak_calling(lambda_df)
+#
+# #%%
+# regular_df.to_csv("../ENCODE Data/eClip_control_and_target/our_control_peaks.csv", index=False)
+# #%% plot p and q values
+# import matplotlib.pyplot as plt
+# import numpy as np
+# df = regular_df
+# df['-log10(p_value)'] = -np.log10(df['p_value'])
+# plt.figure(figsize=(12, 6))
+# plt.scatter(df['start'], df['-log10(p_value)'], c=df['significant'], cmap='viridis', alpha=0.5)
+# plt.axhline(y=-np.log10(0.05), color='r', linestyle='--')  # Threshold line for significance
+# plt.title('Manhattan Plot of Peaks')
+# plt.xlabel('Genomic Position')
+# plt.ylabel('-log10(p-value)')
+# plt.show()

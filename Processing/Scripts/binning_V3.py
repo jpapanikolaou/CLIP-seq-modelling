@@ -52,17 +52,17 @@ def bin_reads_to_dataframe(bam_file_path, bin_size):
     return pd.DataFrame(rows, columns=['chromosome', 'start', 'end', 'count'])
 
 
-#%%
-
-
-control_file_path = "ENCODE Data/eClip_control_and_target/Control/ENCFF913CBD.bam"
-bam_file = pysam.AlignmentFile(control_file_path, "rb")
-# chrom_lengths = extract_regions(bam_file)
-
-
-#%%
-control_binned = bin_reads_to_dataframe(control_file_path,50)
-
-#%%
-control_binned.to_csv("ENCODE Data/eClip_control_and_target/control_binned.csv", index=False)
-
+# #%%
+#
+#
+# control_file_path = "ENCODE Data/eClip_control_and_target/Control/ENCFF913CBD.bam"
+# bam_file = pysam.AlignmentFile(control_file_path, "rb")
+# # chrom_lengths = extract_regions(bam_file)
+#
+#
+# #%%
+# control_binned = bin_reads_to_dataframe(control_file_path,50)
+#
+# #%%
+# control_binned.to_csv("ENCODE Data/eClip_control_and_target/control_binned.csv", index=False)
+#
