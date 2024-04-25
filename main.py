@@ -9,6 +9,7 @@ sys.path.append("/Users/johnpapanikolaou/Columbia/spring-junior/Genomics/Project
 import binning_V3
 import macs_emulator
 import macs_comparison
+import gene_peak_count
 importlib.reload(binning_V3)
 importlib.reload(macs_emulator)
 importlib.reload(macs_comparison)
