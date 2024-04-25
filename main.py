@@ -38,6 +38,10 @@ significant_our_control_data = our_control_data[our_control_data['significant']=
 overlap_df = macs_comparison.find_overlaps_optimized(significant_our_control_data,macs_control_data)
 confusion_matrix = macs_comparison.build_confusion_matrix(significant_our_control_data,macs_control_data,overlap_df)
 
-
 #%% see how we did relative to macs :)
 print(confusion_matrix)
+
+#%% convert peaks to gene counts
+gene_count_path = "ENCODE Data/eClip_control_and_target/hgTablesCanonicalFilt.txt"
+peak_path = "ENCODE Data/eClip_control_and_target/test2_peaks_csv.csv"
+peak_gene_count = gene_peak_count(peak_path,gene_count_path)
