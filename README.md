@@ -41,3 +41,19 @@ macs_path in ```python main.py``` should be
 When it prints removed_count, this number should NOT be zero.
 
 5. Run the rest of ```python main.py```, this bit should be fairly self-explanatory :)
+
+## Converting peaks.csv to gene_count.csv
+
+1. Navigate to https://genome.ucsc.edu/ and click on Genome Browser. Select "Go".
+
+2. Now you should be at the UCSC Genome Browser for Humans page. Click Tools near the top then table browser.
+
+3. In select dataset make group "Genes and Gene Predictions" select GENCODE V44 for track and make the table knownCanonical. For region of interest select genome and for output format select "selected fields from primary and related tables".
+   
+4. After selecting get output, select chrom, chromStart, chromEnd, geneSymbol, description, and hg38 kgXref.
+
+5. Click get output and save.
+
+6. Run ```grep -v -e "non-protein coding RNA" -e "antisense RNA" -e "pseudogene" -e "alt" -e "fix" -e "random"  <outputfile.txt > <outputfilefilt.txt``` in the same working directory as the file you saved
+
+7. Run pipeline
