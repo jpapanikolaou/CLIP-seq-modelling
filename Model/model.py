@@ -23,7 +23,7 @@ chr_1_data = poisson_peaks.subset_chromosome(control_data_stats, 'chr1')
 chr_1_data_no_zeroes = poisson_peaks.remove_zeroes(chr_1_data)
 lambda_1 = poisson_peaks.calculate_lambda(chr_1_data_no_zeroes, set())
 print('lambda 1:',lambda_1)
-lambda_2 = poisson_peaks.calculate_lambda(chr1_data,set())
+lambda_2 = poisson_peaks.calculate_lambda(chr_1_data,set())
 print('lambda 2:',lambda_2)
 
 #%%

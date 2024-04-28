@@ -1,8 +1,10 @@
 import pandas as pd
 
-def count_peaks_in_genes(peaks_file_path, genes_file_path):
+def count_peaks_in_genes(peaks_df, genes_file_path):
+    print("Function is starting")
+    count=0
     # Load significant peaks and gene datasets into pandas DataFrames
-    peaks_df = pd.read_csv(peaks_file_path)
+    # peaks_df = pd.read_csv(peaks_file_path)
     genes_df = pd.read_csv(genes_file_path, sep="\t")
 
     # Define a function to check if a peak overlaps with a gene
@@ -13,7 +15,9 @@ def count_peaks_in_genes(peaks_file_path, genes_file_path):
     gene_peak_counts = {}
 
     # Iterate through each peak
-    for index, peak in peaks_df.iterrows():
+    for index, peak in peaks_df.iterrows(): #TODO: this method is super slow.
+        count+=1
+        print(count)
         peak_chromosome = peak['chromosome']
         peak_start = int(peak['start'])
         peak_end = int(peak['end'])
