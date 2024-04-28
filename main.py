@@ -21,7 +21,7 @@ importlib.reload(RNA)
 #%% run binning_V3 on control
 
 control_file_path = "ENCODE Data/eClip_control_and_target/Control/ControlFiltering/control_filtered_reads.bam"
-control_binned = binning_V3.bin_reads_to_dataframe(control_file_path,250)
+control_binned = binning_V3.bin_reads_to_dataframe(control_file_path,200)
 control_binned_path = "ENCODE Data/eClip_control_and_target/control_binned.csv"
 control_binned.to_csv(control_binned_path, index=False)
 
