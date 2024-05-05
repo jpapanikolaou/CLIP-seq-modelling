@@ -1,7 +1,11 @@
 Experiment data:
 
+Root Directory: https://www.encodeproject.org/search/?type=Experiment&control_type!=*&assay_term_name=eCLIP&replicates.library.biosample.donor.organism.scientific_name=Homo%20sapiens&biosample_ontology.term_name=K562&status=released
 
-Experiment 1: eClip
+Experiment 1: eClip (TARDBP)
 
 TARGET download: https://www.encodeproject.org/files/ENCFF862SNV/
 CONTROL download: https://www.encodeproject.org/files/ENCFF913CBD/
+
+Experiment 2: eClip (EIF4E)
+TARGET download: https://www.encodeproject.org/files/ENCFF653YQW/
