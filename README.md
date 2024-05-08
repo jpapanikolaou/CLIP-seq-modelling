@@ -35,6 +35,16 @@ This indexes the files and allows bam_file.fetch() to be called, which greatly s
 
 Pip installing any missing packages into your conda environment should resolve any remaining compatability issues. As this program is written in python, we don't anticipate any compatibility issues or great difficulty in setup.
 
+The following python packages are necessary for the program to run. This was written and tested on python 3.9.13.
+
+1. Statsmodels
+2. Scipy
+3. Pandas
+4. Numpy
+5. Pyranges
+6. SeqUtils
+7. Bio
+
 4. Set up main.py with the appropriate filtered files.
 
 macs_path in ```python main.py``` should be 
