@@ -14,7 +14,7 @@ Data that we used is present in ```datainfo.txt``` in the root directory of this
 
 ## How to run the pipeline
 
-1. Install BAM files from ENCODE in your preferred data path
+1. Install BAM files from ENCODE in your preferred data path. The data we used is in dataInfo.txt in the root directory.
 2. Install samtools, if you havene't already. Note that you will need to use ```brew install``` if 
 you're on a Mac, as the samtools verision on conda is out of date and doesn't have ```markdup``` on the path
 3. Do filtering
