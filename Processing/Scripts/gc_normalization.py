@@ -1,3 +1,4 @@
+#%%
 import Bio.SeqUtils
 import pysam
 from Bio.SeqUtils import GC_skew

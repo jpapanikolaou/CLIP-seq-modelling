@@ -31,7 +31,9 @@ Second, run
 samtools index <output file name.bam>
 ```
 
-This indexes the files and allows bam_file.fetch() to be called, which greatly speeds up the binning process
+This indexes the files and allows bam_file.fetch() to be called, which greatly speeds up the binning process.
+
+Pip installing any missing packages into your conda environment should resolve any remaining compatability issues. As this program is written in python, we don't anticipate any compatibility issues or great difficulty in setup.
 
 4. Set up main.py with the appropriate filtered files.
 
@@ -57,3 +59,17 @@ When it prints removed_count, this number should NOT be zero.
 6. Run ```grep -v -e "non-protein coding RNA" -e "antisense RNA" -e "pseudogene" -e "alt" -e "fix" -e "random"  <outputfile.txt > <outputfilefilt.txt``` in the same working directory as the file you saved
 
 7. Run pipeline
+
+## Description of each file
+
+The entire pipeline, and every function called, can be seen in main_fcn.py. While the plotting code for each experiment shown in the experiment is not present in this repository, the code for generating plots can also be seen in ```main_fcn.py```. 
+
+Location of each function called. Note that explanations and justifications of each function is present in the ```methodology``` section of the final report.
+m
+1. bin_reads_to_dataframe is present in the file binnning_V3, in the ```processing``` directory.
+2. calcualte_excluded_lambdas is in the ```macs_emulator``` file. Note that while this file is named ```macs_emulator```, this was a naming choice - we referred to peak calling as 'macs', and the file itself does not draw from any source code in MACS. This calculates lambda values and generates p-values and adjusted-p values for the experiment. This is where the peak-calling takes place
+3. read_encode() is a utility funciotn present in the ```macs_comparision``` file and is a data procesing script to process the downladed CSV format one gets from the ENCODE database.
+4. find_overlaps_optimized() is in the ```macs_comparison``` file and uses the ```pyranges``` library for greater speed.
+5. merge_main() is in the ```manual_gc``` file, which contains the normalization code for GC normalization.
+
+The confusion matrices for comparion with macs is contained directly in main_fcn.py.
