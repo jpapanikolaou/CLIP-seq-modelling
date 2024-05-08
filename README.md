@@ -71,5 +71,5 @@ m
 3. read_encode() is a utility funciotn present in the ```macs_comparision``` file and is a data procesing script to process the downladed CSV format one gets from the ENCODE database.
 4. find_overlaps_optimized() is in the ```macs_comparison``` file and uses the ```pyranges``` library for greater speed.
 5. merge_main() is in the ```manual_gc``` file, which contains the normalization code for GC normalization.
-
+6. DataInfo.txt contains instructions on how to access data that we used for analysis.
 The confusion matrices for comparion with macs is contained directly in main_fcn.py.
